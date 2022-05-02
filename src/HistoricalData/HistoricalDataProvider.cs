@@ -15,19 +15,11 @@ namespace Yahoo.Finance
         NumberFormatInfo nfi = NumberFormatInfo.InvariantInfo;
         DateTimeFormatInfo dfi = DateTimeFormatInfo.InvariantInfo;
 
-        public async Task DownloadHistoricalDataAsync(string StockSymbol, DateTime PeriodStart, DateTime PeriodEnd, int try_count = 10)
+        public async Task DownloadHistoricalDataAsync(string StockSymbol, DateTime PeriodStart, DateTime PeriodEnd, int try_count = 3)
         {
             //Set up
             HistoricalData = null;
             DownloadResult = HistoricalDataDownloadResult.Downloading;
-
-
-            //Get try count to use
-            int trycountToUse = 10;
-            if (try_count > 0)
-            {
-                trycountToUse = try_count;
-            }
 
             //Get the data
             int HaveTriedCount = 0;
@@ -123,7 +115,7 @@ namespace Yahoo.Finance
                     }
                     catch
                     {
-                        throw new Exception("Unable to conver this row: " + thisrow);
+                        throw new Exception("Unable to convert this row: " + thisrow);
                     }
                 }
             }
